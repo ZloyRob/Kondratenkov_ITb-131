@@ -42,5 +42,6 @@
 		2.  -login 111 -pass 12354  -res A.B.C -role WRITE -ds вчера -de завтра -vol 256    |    exit-код 5
 		3.  -login 111 -pass 12354  -res A.B.C -role WRITE -ds 2016-11-30 -de 20016-11-30 -vol сколько получится    |    exit-код 5
 		4.    | справка  
+5. [ ]Создать bat-файл 
 4. [ ]Радоваться
 
