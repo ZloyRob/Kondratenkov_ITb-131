@@ -4,6 +4,9 @@
 public class MainPr {
     public static void main(String[] args) {
         System.out.println("Hello World");
-        System.exit(2);
+       // System.exit(2);
+        for (int i = 0; i < args.length; i++) {
+            System.out.println(args[i]);
+        }
     }
 }
