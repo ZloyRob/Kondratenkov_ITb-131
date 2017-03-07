@@ -5,15 +5,16 @@ import static java.lang.System.exit;
 /**
  * Created by Вадим on 06.03.2017.
  */
-public class MainPr {
+public class Main {
     public static void main(String[] args) {
+
         System.out.println("Hello World");
         // System.exit(2);
         for (int i = 0; i < args.length; i++) {
             System.out.println(args[i]);
         }
-        User Alesha = new User("log1","pas1");
-        User Misha = new User("log2","pas2");
+        User Alesha = new User("log1","pas1",1);
+        User Misha = new User("log2","pas2",2);
         ArrayList<User> Users = new ArrayList();
         Users.add(Alesha);
         Users.add(Misha);
@@ -29,4 +30,7 @@ public class MainPr {
             } else exit(2);
         } else  System.exit(1);
     }
+}
+enum Roles{
+    READ, WRITE, EXECUTE
 }
