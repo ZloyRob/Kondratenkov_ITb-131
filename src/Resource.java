@@ -6,9 +6,9 @@ import java.util.ArrayList;
 public class Resource {
     String path;
     ArrayList<Integer> usersId = new ArrayList();
-    ArrayList<Roles> role = new ArrayList();
+    ArrayList<String> role = new ArrayList();
 
-    public Resource(String path, ArrayList<Integer> userId, ArrayList<Roles> role) {
+    public Resource(String path, ArrayList<Integer> userId, ArrayList<String> role) {
         this.path = path;
         this.usersId = userId;
         this.role = role;
