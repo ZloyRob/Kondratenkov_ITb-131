@@ -17,11 +17,14 @@ public class MainPr {
         ArrayList<User> Users = new ArrayList();
         Users.add(Alesha);
         Users.add(Misha);
-        for (int i = 0; i < 2; i++) {
-            System.out.println(Users.get(i).login);
+        int ind = -1;
+        for (int i = 0; i < Users.size(); i++) {
+           if( args[0].compareTo(Users.get(i).login)==0){
+               ind=i;
+           }
         }
-        if (args[0].compareTo("login")==0) {
-            if (args[1].compareTo("pass") ==0 ) {
+        if (ind!=-1) {
+            if (args[1].compareTo(Users.get(ind).pass) ==0 ) {
                 exit(0);
             } else exit(2);
         } else  System.exit(1);
