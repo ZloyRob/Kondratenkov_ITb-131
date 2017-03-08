@@ -39,7 +39,7 @@
 		4. -login 111 -pass 12354  -res A.B.C -role WROTE   |    exit-код 3
 5. [ ] Аккаунтинг 
 	1. [ ] Создать методы проверки даты и объема
-	2. [ ] Создать класс Accounting(даты, объем, ресурс)
+	2. [x] Создать класс Accounting(даты, объем, ресурс, userId)
 	3. [ ] Написать тесты
 		1.  -login 111 -pass 12354  -res A.B.C -role WRITE -ds 2016-11-30 -de 20016-11-30 -vol 256    |    exit-код 0   
 		2.  -login 111 -pass 12354  -res A.B.C -role WRITE -ds вчера -de завтра -vol 256    |    exit-код 5

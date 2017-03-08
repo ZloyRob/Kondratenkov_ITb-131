@@ -58,4 +58,10 @@ public class AAAService {
         }
         return tf;
     }
+    public boolean CheckValDandV(UserInput us)
+    {
+        boolean ch=false;
+
+        return  ch;
+    }
 }
