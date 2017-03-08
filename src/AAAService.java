@@ -1,4 +1,6 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Вадим on 08.03.2017.
@@ -58,10 +60,22 @@ public class AAAService {
         }
         return tf;
     }
-    public boolean CheckValDandV(UserInput us)
-    {
-        boolean ch=false;
+    public boolean CheckValDandV(UserInput us){
+        boolean dt=false;
+        boolean in=false;
+        boolean f = false;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd") {{ setLenient(false); }};
+        try{
+            us.ds=sdf.parse(us.dss);
+            us.de=sdf.parse(us.des);
+            dt=true;
 
-        return  ch;
+        }catch (Exception e) {}
+        try{
+            us.vol=Integer.valueOf(us.vols);
+            if(us.vol>0){in=true;}
+        }catch (NumberFormatException e){}
+        if(dt==true & in == true) f=true;
+        return  f;
     }
 }

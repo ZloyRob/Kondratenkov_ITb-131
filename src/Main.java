@@ -24,6 +24,7 @@ public class Main {
         ArrayList<Resource> Res = new ArrayList();
         Res.add(res1);
         Res.add(res2);
+        ArrayList<Accounting>Jur=new ArrayList();
         UserInput usIn = new UserInput();
         Validator valid = new Validator();
         valid.Allocation(usIn,args);

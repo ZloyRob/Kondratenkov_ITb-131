@@ -23,6 +23,9 @@ public class Validator {
             us.pass=line.getOptionValue("pass");
             us.path=line.getOptionValue("res");
             us.rl=line.getOptionValue("role");
+            us.dss=line.getOptionValue("ds");
+            us.des=line.getOptionValue("de");
+            us.vols=line.getOptionValue("vol");
         }
         catch ( ParseException exp){
             System.out.println( "Unexpected exception:" + exp.getMessage() );
@@ -46,7 +49,11 @@ public class Validator {
         }
         else return pr;
     }
-    public boolean Accouting(UserInput us){
-        return true;
+    public boolean Accouting(boolean pr, UserInput us,ArrayList<Accounting> Jur){
+        if(pr==true){
+            boolean vp=aserv.CheckValDandV(us);
+            if (vp==false) System.exit(5);
+        }
+        return pr;
     }
 }

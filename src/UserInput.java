@@ -8,8 +8,11 @@ public class UserInput {
     String pass;
     String path;
     String rl;
-    int vol;
+    String vols;
     int userId;
+    String dss;
+    String des;
+    int vol;
     Date ds;
     Date de;
 }
