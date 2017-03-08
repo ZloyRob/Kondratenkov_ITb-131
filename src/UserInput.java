@@ -11,7 +11,7 @@ public class UserInput {
     int vol;
     Date ds;
     Date de;
-    public UserInput(String login, String pass, String path, String rl, int vol, Date ds, Date de){
+   /* public UserInput(String login, String pass, String path, String rl, int vol, Date ds, Date de){
         this.login=login;
         this.pass=pass;
         this.path=path;
@@ -20,5 +20,5 @@ public class UserInput {
         this.ds=ds;
         this.de=de;
 
-    }
+    }*/
 }
