@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("Hello World");
-        // System.exit(2);
         for (int i = 0; i < args.length; i++) {
             System.out.println(args[i]);
         }
@@ -29,8 +28,10 @@ public class Main {
         ArrayList<Resource> Res = new ArrayList();
         Res.add(res1);
         Res.add(res2);
-
-
+        UserInput usIn = new UserInput();
+        Validator valid = new Validator();
+        valid.Allocation(usIn,args);
+        if (valid.Authentication(Users,usIn) == true) System.out.println("Authentication +");
     }
 }
 enum Roles{

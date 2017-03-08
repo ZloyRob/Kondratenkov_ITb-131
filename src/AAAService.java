@@ -8,7 +8,7 @@ public class AAAService {
         int a=-1;
         for (int i = 0; i < Users.size(); i++) {
             if( us.login.compareTo(Users.get(i).login)==0){
-                a=Users.get(i).userId ;
+                a=i ;
             }
         }
         return a;
@@ -16,10 +16,11 @@ public class AAAService {
     public boolean Check(ArrayList<User> Users, int ind,UserInput us ){
         boolean trf=false;
         if (ind!=-1) {
-            if (us.login.compareTo(Users.get(ind).pass) ==0 ) {
+            if (us.pass.compareTo(Users.get(ind).pass) ==0 ) {
                 trf=true;
             }
         }
         return trf;
     }
+
 }
