@@ -32,13 +32,19 @@ public class Validator {
     public boolean Authentication(ArrayList<User> Users, UserInput us){
         int ind= aserv.FindUser(Users,us);
         if (ind == -1) System.exit(1);
-        boolean tr = aserv.Check(Users,ind,us);
+        boolean tr = aserv.CheckPas(Users,ind,us);
         if (tr==false) System.exit(2);
         return tr;
     }
-    public boolean Authorization(boolean pr, UserInput us){
-
-        return true;
+    public boolean Authorization(boolean pr, UserInput us, ArrayList<Resource> Res){
+        if(pr==true){
+        boolean pro= aserv.CheckRole(us);
+        if (pro==false) System.exit(3);
+        boolean az=aserv.CheckAccess(Res,us);
+        if (az==false) System.exit(4);
+        return az;
+        }
+        else return pr;
     }
     public boolean Accouting(UserInput us){
         return true;

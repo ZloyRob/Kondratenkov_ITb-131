@@ -9,11 +9,7 @@ import static java.lang.System.exit;
  */
 public class Main {
     public static void main(String[] args) {
-
-        System.out.println("Hello World");
-        for (int i = 0; i < args.length; i++) {
-            System.out.println(args[i]);
-        }
+        System.out.println("Start Program");
         User Alesha = new User("log1","pas1",1);
         User Misha = new User("log2","pas2",2);
         ArrayList<User> Users = new ArrayList();
@@ -31,7 +27,13 @@ public class Main {
         UserInput usIn = new UserInput();
         Validator valid = new Validator();
         valid.Allocation(usIn,args);
-        if (valid.Authentication(Users,usIn) == true) System.out.println("Authentication +");
+        for (int i = 1; i < args.length; i+=2) {
+            System.out.println(args[i]);
+        }
+        boolean p1 = valid.Authentication(Users,usIn);
+        if (p1 == true) System.out.println("Authentication +");
+        boolean p2 = valid.Authorization(p1,usIn,Res);
+        if (p2 == true) System.out.println("Authorization +");
     }
 }
 enum Roles{
