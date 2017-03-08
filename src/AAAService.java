@@ -1,6 +1,13 @@
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
+import java.util.StringJoiner;
+
+import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
 /**
  * Created by Вадим on 08.03.2017.
@@ -19,7 +26,8 @@ public class AAAService {
     public boolean CheckPas(ArrayList<User> Users, int ind,UserInput us ){
         boolean trf=false;
         if (ind!=-1) {
-            if (us.pass.compareTo(Users.get(ind).pass) ==0 ) {
+            String tpas = md5Hex(md5Hex(us.pass)+Users.get(ind).salt);
+            if (tpas.compareTo(Users.get(ind).pass) ==0 ) {
                 trf=true;
             }
         }
@@ -81,5 +89,13 @@ public class AAAService {
     public void AddinJ(UserInput us, ArrayList<Accounting> jur){
         Accounting record = new Accounting(us.ds, us.de, us.vol,us.path, us.userId);
         jur.add(record);
+    }
+    public String AddSal(){
+        RandomStringUtils rsu = new RandomStringUtils();
+        String result = rsu.randomAscii(7);
+        return result;
+    }
+    public void AddHash(User us){
+        us.pass= md5Hex(md5Hex(us.pass)+us.salt);
     }
 }

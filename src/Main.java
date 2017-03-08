@@ -1,3 +1,5 @@
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,8 +12,12 @@ import static java.lang.System.exit;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Start Program");
-        User Alesha = new User("log1","pas1",1);
-        User Misha = new User("log2","pas2",2);
+        AAAService aa = new AAAService();
+
+        User Alesha = new User("log1", aa.AddSal(), "pas1",1);
+        aa.AddHash(Alesha);
+        User Misha = new User("log2", aa.AddSal(),"pas2",2);
+        aa.AddHash(Misha);
         ArrayList<User> Users = new ArrayList();
         Users.add(Alesha);
         Users.add(Misha);
@@ -29,7 +35,7 @@ public class Main {
         Validator valid = new Validator();
         valid.Allocation(usIn,args);
         for (int i = 1; i < args.length; i+=2) {
-            System.out.println(args[i]);
+         System.out.println(args[i]);
         }
         boolean p1 = valid.Authentication(Users,usIn);
         if (p1 == true) System.out.println("Authentication +");
@@ -40,6 +46,7 @@ public class Main {
         for (int i = 0; i <jur.size() ; i++) {
             System.out.println(jur.get(i).userId+" "+jur.get(i).res+" "+jur.get(i).vol+" "+jur.get(i).ds+" "+jur.get(i).de);
         }
+
     }
 }
 enum Roles{

@@ -13,12 +13,12 @@ public class Validator {
     public UserInput Allocation(UserInput us, String[] args){
         opt.addOption("l", "login", true, "Login" );
         opt.addOption("p", "pass", true, "Password" );
-        opt.addOption("re", "res", false, "Resource" );
-        opt.addOption("ro", "role", false, "Role" );
-        opt.addOption("ds", "ds", false, "Date start" );
-        opt.addOption("de", "de", false, "Date finish" );
-        opt.addOption("v", "vol", false, "Volume" );
-        opt.addOption("h", "help", false, "Help" );
+        opt.addOption("re", "res", true, "Resource" );
+        opt.addOption("ro", "role", true, "Role" );
+        opt.addOption("ds", "ds", true, "Date start" );
+        opt.addOption("de", "de", true, "Date finish" );
+        opt.addOption("v", "vol", true, "Volume" );
+        opt.addOption("h", "help", true, "Help" );
         try{
         CommandLine line = parser.parse( opt, args );
             us.login=line.getOptionValue("login");
@@ -46,6 +46,7 @@ public class Validator {
         if (ind == -1) System.exit(1);
         boolean tr = aserv.CheckPas(Users,ind,us);
         if (tr==false) System.exit(2);
+        if (us.rl==null) tr=false;
         return tr;
     }
     public boolean Authorization(boolean pr, UserInput us, ArrayList<Resource> Res){
@@ -60,11 +61,12 @@ public class Validator {
     }
     public boolean Accouting(boolean pr, UserInput us,ArrayList<Accounting> jur){
         if(pr==true){
+            if (us.dss==null){  pr = false; return pr;}
+            else {
             boolean vp=aserv.CheckValDandV(us);
             if (vp==false) System.exit(5);
             aserv.AddinJ(us,jur);
-            return vp;
-        }else
-        return pr;
+            return vp;}
+        }else return pr;
     }
 }
