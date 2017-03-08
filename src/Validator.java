@@ -49,11 +49,13 @@ public class Validator {
         }
         else return pr;
     }
-    public boolean Accouting(boolean pr, UserInput us,ArrayList<Accounting> Jur){
+    public boolean Accouting(boolean pr, UserInput us,ArrayList<Accounting> jur){
         if(pr==true){
             boolean vp=aserv.CheckValDandV(us);
             if (vp==false) System.exit(5);
-        }
+            aserv.AddinJ(us,jur);
+            return vp;
+        }else
         return pr;
     }
 }

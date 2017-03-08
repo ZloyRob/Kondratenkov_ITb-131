@@ -24,7 +24,7 @@ public class Main {
         ArrayList<Resource> Res = new ArrayList();
         Res.add(res1);
         Res.add(res2);
-        ArrayList<Accounting>Jur=new ArrayList();
+        ArrayList<Accounting>jur=new ArrayList();
         UserInput usIn = new UserInput();
         Validator valid = new Validator();
         valid.Allocation(usIn,args);
@@ -35,6 +35,11 @@ public class Main {
         if (p1 == true) System.out.println("Authentication +");
         boolean p2 = valid.Authorization(p1,usIn,Res);
         if (p2 == true) System.out.println("Authorization +");
+        boolean p3 = valid.Accouting(p2,usIn,jur);
+        if (p3 == true) System.out.println("Accouting +");
+        for (int i = 0; i <jur.size() ; i++) {
+            System.out.println(jur.get(i).userId+" "+jur.get(i).res+" "+jur.get(i).vol+" "+jur.get(i).ds+" "+jur.get(i).de);
+        }
     }
 }
 enum Roles{

@@ -64,7 +64,7 @@ public class AAAService {
         boolean dt=false;
         boolean in=false;
         boolean f = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd") {{ setLenient(false); }};
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd") {{ setLenient(false); }};
         try{
             us.ds=sdf.parse(us.dss);
             us.de=sdf.parse(us.des);
@@ -77,5 +77,9 @@ public class AAAService {
         }catch (NumberFormatException e){}
         if(dt==true & in == true) f=true;
         return  f;
+    }
+    public void AddinJ(UserInput us, ArrayList<Accounting> jur){
+        Accounting record = new Accounting(us.ds, us.de, us.vol,us.path, us.userId);
+        jur.add(record);
     }
 }
