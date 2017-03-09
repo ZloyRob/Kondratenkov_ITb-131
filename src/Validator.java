@@ -47,7 +47,7 @@ public class Validator {
         if (ind == -1) System.exit(1);
         boolean tr = aserv.CheckPas(Users, ind, us);
         if (tr == false) System.exit(2);
-        if (us.rl == null) tr = false;
+        if (us.rl == null & us.path==null) tr = false;
         return tr;
     }
 
