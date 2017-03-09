@@ -1,14 +1,12 @@
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by Вадим on 08.03.2017.
- */
 public class Resource {
     String path;
-    ArrayList<Integer> usersId = new ArrayList();
-    ArrayList<String> role = new ArrayList();
+    List<Integer> usersId = new ArrayList();
+    List<String> role = new ArrayList();
 
-    public Resource(String path, ArrayList<Integer> userId, ArrayList<String> role) {
+    public Resource(String path, List<Integer> userId, List<String> role) {
         this.path = path;
         this.usersId = userId;
         this.role = role;

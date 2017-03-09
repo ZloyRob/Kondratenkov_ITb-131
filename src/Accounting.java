@@ -1,8 +1,5 @@
 import java.util.Date;
 
-/**
- * Created by Вадим on 09.03.2017.
- */
 public class Accounting {
     Date ds;
     Date de;
@@ -17,4 +14,5 @@ public class Accounting {
         this.res = res;
         this.userId = userId;
     }
+
 }

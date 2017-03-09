@@ -2,16 +2,12 @@ import org.apache.commons.cli.*;
 
 import java.util.ArrayList;
 
-/**
- * Created by Вадим on 08.03.2017.
- */
 public class Validator {
     AAAService aserv = new AAAService();
     CommandLineParser parser = new DefaultParser();
-
     Options opt = new Options();
 
-    public UserInput Allocation(UserInput us, String[] args) {
+    public UserInput allocation(UserInput us, String[] args) {
         opt.addOption("l", "login", true, "Login");
         opt.addOption("p", "pass", true, "Password");
         opt.addOption("re", "res", true, "Resource");
@@ -42,34 +38,34 @@ public class Validator {
         return us;
     }
 
-    public boolean Authentication(ArrayList<User> Users, UserInput us) {
-        int ind = aserv.FindUser(Users, us);
-        if (ind == -1) System.exit(1);
-        boolean tr = aserv.CheckPas(Users, ind, us);
-        if (tr == false) System.exit(2);
-        if (us.rl == null & us.path==null) tr = false;
-        return tr;
+    public boolean authentication(ArrayList<User> Users, UserInput us) {
+        boolean log = aserv.findUser(Users, us);
+        if (log == false) System.exit(1);
+        boolean pas = aserv.checkPas(Users, us);
+        if (pas == false) System.exit(2);
+        if (us.rl == null & us.path == null) pas = false;
+        return pas;
     }
 
-    public boolean Authorization(boolean pr, UserInput us, ArrayList<Resource> Res) {
+    public boolean authorization(boolean pr, UserInput us, ArrayList<Resource> Res) {
         if (pr == true) {
-            boolean pro = aserv.CheckRole(us);
+            boolean pro = aserv.checkRole(us);
             if (pro == false) System.exit(3);
-            boolean az = aserv.CheckAccess(Res, us);
+            boolean az = aserv.checkAccess(Res, us);
             if (az == false) System.exit(4);
             return az;
         } else return pr;
     }
 
-    public boolean Accouting(boolean pr, UserInput us, ArrayList<Accounting> jur) {
+    public boolean accouting(boolean pr, UserInput us, ArrayList<Accounting> jur) {
         if (pr == true) {
             if (us.dss == null) {
                 pr = false;
                 return pr;
             } else {
-                boolean vp = aserv.CheckValDandV(us);
+                boolean vp = aserv.checkValDandV(us);
                 if (vp == false) System.exit(5);
-                aserv.AddinJ(us, jur);
+                aserv.addinJ(us, jur);
                 return vp;
             }
         } else return pr;
