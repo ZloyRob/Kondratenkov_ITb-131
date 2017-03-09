@@ -1,1 +1,0 @@
-java -cp D:\StartJava\Kondratenkov_Vadim\libs\commons-lang3-3.5.jar;.  D:\StartJava\Kondratenkov_Vadim\out\production\Kondratenkov_Vadim\Main
