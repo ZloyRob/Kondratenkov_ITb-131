@@ -6,17 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b9d0734-cf92-4510-9a9d-5a7be48d70d8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Kondratenkov_Vadim_jar/Kondratenkov_Vadim.jar" afterPath="$PROJECT_DIR$/out/artifacts/Kondratenkov_Vadim_jar/Kondratenkov_Vadim.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/Kondratenkov_Vadim_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/Kondratenkov_Vadim_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/commons_cli_1_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_cli_1_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/commons_codec_1_10.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_codec_1_10.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/commons_lang3_3_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_lang3_3_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Testbat.bat" afterPath="$PROJECT_DIR$/Testbat.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Kondratenkov_Vadim/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/out/production/Kondratenkov_Vadim/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-    </list>
+    <list default="true" id="0b9d0734-cf92-4510-9a9d-5a7be48d70d8" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
