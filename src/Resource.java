@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
 
-public class Resource {
+class Resource {
     String path;
-    List<Integer> usersId = new ArrayList();
-    List<String> role = new ArrayList();
+    Integer usersId;
+    String role ;
 
-    public Resource(String path, List<Integer> userId, List<String> role) {
+    Resource(String path, Integer userId, String role) {
         this.path = path;
         this.usersId = userId;
         this.role = role;

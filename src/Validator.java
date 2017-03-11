@@ -3,11 +3,11 @@ import org.apache.commons.cli.*;
 import java.util.ArrayList;
 
 public class Validator {
-    AAAService aserv = new AAAService();
-    CommandLineParser parser = new DefaultParser();
-    Options opt = new Options();
+    private AAAService aserv = new AAAService();
+    private CommandLineParser parser = new DefaultParser();
+    private Options opt = new Options();
 
-    public UserInput allocation(UserInput us, String[] args) {
+    UserInput allocation(UserInput us, String[] args) {
         opt.addOption("l", "login", true, "Login");
         opt.addOption("p", "pass", true, "Password");
         opt.addOption("re", "res", true, "Resource");
@@ -38,36 +38,32 @@ public class Validator {
         return us;
     }
 
-    public boolean authentication(ArrayList<User> Users, UserInput us) {
+    boolean authentication(ArrayList<User> Users, UserInput us) {
         boolean log = aserv.findUser(Users, us);
-        if (log == false) System.exit(1);
+        if (!log) System.exit(1);
         boolean pas = aserv.checkPas(Users, us);
-        if (pas == false) System.exit(2);
-        if (us.rl == null & us.path == null) pas = false;
-        return pas;
+        if (!pas) System.exit(2);
+        //if (us.rl == null & us.path == null) pas = false;
+        return true;
     }
 
-    public boolean authorization(boolean pr, UserInput us, ArrayList<Resource> Res) {
-        if (pr == true) {
+    boolean authorization(boolean pr, UserInput us, ArrayList<Resource> Res) {
+        if (pr & us.rl!=null & us.path!=null) {
             boolean pro = aserv.checkRole(us);
-            if (pro == false) System.exit(3);
+            if (!pro) System.exit(3);
             boolean az = aserv.checkAccess(Res, us);
-            if (az == false) System.exit(4);
-            return az;
-        } else return pr;
+            if (!az) System.exit(4);
+            return true;
+        } else return false;
     }
 
-    public boolean accouting(boolean pr, UserInput us, ArrayList<Accounting> jur) {
-        if (pr == true) {
-            if (us.dss == null) {
-                pr = false;
-                return pr;
-            } else {
+    boolean accouting(boolean pr, UserInput us, ArrayList<Accounting> jur) {
+        if (pr & us.dss!=null) {
                 boolean vp = aserv.checkValDandV(us);
-                if (vp == false) System.exit(5);
+                if (!vp) System.exit(5);
                 aserv.addinJ(us, jur);
-                return vp;
+                return true;
             }
-        } else return pr;
+         else return false;
     }
 }
