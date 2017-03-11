@@ -2,7 +2,7 @@
 class Resource {
     String path;
     Integer usersId;
-    String role ;
+    String role;
 
     Resource(String path, Integer userId, String role) {
         this.path = path;

@@ -4,7 +4,7 @@ public class UserInput {
     String login;
     String pass;
     String path;
-    String rl;
+    String role;
     String vols;
     int userId;
     String dss;

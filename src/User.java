@@ -1,5 +1,6 @@
 
-public class User {
+public class
+User {
     String login;
     String pass;
     int userId;

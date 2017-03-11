@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
 public class AAAService {
-    boolean findUser(ArrayList<User> Users, UserInput us) {
+    enum Roles {
+        READ, WRITE, EXECUTE
+    }
+
+    boolean isSearchUser(ArrayList<User> Users, UserInput us) {
         for (User user : Users) {
             if (us.login.equals(user.login)) {
                 us.userId = user.userId;
@@ -16,11 +20,10 @@ public class AAAService {
         return false;
     }
 
-    boolean checkPas(ArrayList<User> Users, UserInput us) {
+    boolean isCheckPass(ArrayList<User> Users, UserInput us) {
         for (User user : Users) {
             if (us.userId == user.userId) {
-                String tpas = md5Hex(md5Hex(us.pass) + user.salt);
-                if (tpas.equals(user.pass)) {
+                if (md5Hex(md5Hex(us.pass) + user.salt).equals(user.pass)) {
                     return true;
                 }
             }
@@ -28,26 +31,31 @@ public class AAAService {
         return false;
     }
 
-    boolean checkRole(UserInput us) {
-        Enums.Roles[] allrole = Enums.Roles.values();
-        for (Enums.Roles allroles : allrole) {
-            if (us.rl.equals(allroles.toString())) {
+    boolean isCheckRole(UserInput us) {
+        Roles[] allrole = Roles.values();
+        for (Roles allroles : allrole) {
+            if (us.role.equals(allroles.toString())) {
                 return true;
             }
         }
         return false;
     }
 
-    boolean checkAccess(ArrayList<Resource> Res, UserInput us) {
-       // us.path+=".";
-        String[] masOfPath=us.path.split("\\.");
-        String findPath="";
-        for(String string:masOfPath) {
-            findPath+=string;
+    /**
+     * Метод проверяет разрешен ли пользователю доступ к ресурсу
+     * Поиск происходит начиная с головы пути ресурса и с каждой итерацией спускается все ниже
+     *
+     * @return Возвращается true если доступ разрешен
+     */
+    boolean isCheckAccess(ArrayList<Resource> Res, UserInput us) {
+        String[] masOfPath = us.path.split("\\."); //разбиваем путь по уровням
+        String findPath = "";
+        for (String string : masOfPath) {
+            findPath += string; //опускаемся на уровень ниже
             for (Resource resource : Res) {
                 if (findPath.equals(resource.path)) { //находим нужный ресурс
-                    if (us.userId == resource.usersId) {
-                        if (us.rl.equals(resource.role)) {
+                    if (us.userId == resource.usersId) { //проверям пользователя и роль
+                        if (us.role.equals(resource.role)) {
                             return true;
                         }
                     }
@@ -57,7 +65,7 @@ public class AAAService {
         return false;
     }
 
-    boolean checkValDandV(UserInput us) {
+    boolean isCheckDateAndVol(UserInput us) {
         boolean dateVal = false;
         boolean volVal = false;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd") {{
@@ -80,14 +88,13 @@ public class AAAService {
         return dateVal & volVal;
     }
 
-    void addinJ(UserInput us, ArrayList<Accounting> jur) {
+    void addInJournal(ArrayList<Accounting> journal, UserInput us) {
         Accounting record = new Accounting(us.ds, us.de, us.vol, us.path, us.userId);
-        jur.add(record);
+        journal.add(record);
     }
 
-    String addSal() {
-        return  RandomStringUtils.randomAscii(7);
-
+    String addSalt() {
+        return RandomStringUtils.randomAscii(7);
     }
 
     void addHash(User us) {

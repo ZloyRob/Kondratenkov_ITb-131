@@ -14,7 +14,8 @@ public class Accounting {
         this.res = res;
         this.userId = userId;
     }
-    public String  toString() {
+
+    public String toString() {
         String formatString = "Пользователь: %d Ресурс: %s Объем: %d Дата начала: %s Дата окончания: %s";
         return String.format(formatString, userId, res, vol, ds, de);
     }

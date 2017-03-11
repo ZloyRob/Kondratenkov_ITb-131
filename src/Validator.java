@@ -3,7 +3,7 @@ import org.apache.commons.cli.*;
 import java.util.ArrayList;
 
 public class Validator {
-    private AAAService aserv = new AAAService();
+    private AAAService aaaService = new AAAService();
     private CommandLineParser parser = new DefaultParser();
     private Options opt = new Options();
 
@@ -21,7 +21,7 @@ public class Validator {
             us.login = line.getOptionValue("login");
             us.pass = line.getOptionValue("pass");
             us.path = line.getOptionValue("res");
-            us.rl = line.getOptionValue("role");
+            us.role = line.getOptionValue("role");
             us.dss = line.getOptionValue("ds");
             us.des = line.getOptionValue("de");
             us.vols = line.getOptionValue("vol");
@@ -38,32 +38,39 @@ public class Validator {
         return us;
     }
 
-    boolean authentication(ArrayList<User> Users, UserInput us) {
-        boolean log = aserv.findUser(Users, us);
-        if (!log) System.exit(1);
-        boolean pas = aserv.checkPas(Users, us);
-        if (!pas) System.exit(2);
-        //if (us.rl == null & us.path == null) pas = false;
+    boolean isAuthentication(ArrayList<User> Users, UserInput us) {
+        if (!aaaService.isSearchUser(Users, us)) {
+            System.exit(1);
+        }
+        if (!aaaService.isCheckPass(Users, us)) {
+            System.exit(2);
+        }
         return true;
     }
 
-    boolean authorization(boolean pr, UserInput us, ArrayList<Resource> Res) {
-        if (pr & us.rl!=null & us.path!=null) {
-            boolean pro = aserv.checkRole(us);
-            if (!pro) System.exit(3);
-            boolean az = aserv.checkAccess(Res, us);
-            if (!az) System.exit(4);
+    boolean isAuthorization(ArrayList<Resource> Res, UserInput us, boolean isAuthentication) {
+        if (isAuthentication & us.role != null & us.path != null) {
+            if (!aaaService.isCheckRole(us)) {
+                System.exit(3);
+            }
+            if (!aaaService.isCheckAccess(Res, us)) {
+                System.exit(4);
+            }
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
-    boolean accouting(boolean pr, UserInput us, ArrayList<Accounting> jur) {
-        if (pr & us.dss!=null) {
-                boolean vp = aserv.checkValDandV(us);
-                if (!vp) System.exit(5);
-                aserv.addinJ(us, jur);
-                return true;
+    boolean isAccouting(ArrayList<Accounting> journal, UserInput us, boolean isAuthorization) {
+        if (isAuthorization & us.dss != null) {
+            if (!aaaService.isCheckDateAndVol(us)) {
+                System.exit(5);
             }
-         else return false;
+            aaaService.addInJournal(journal, us);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
