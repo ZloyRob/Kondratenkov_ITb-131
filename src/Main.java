@@ -3,12 +3,9 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Start Program");
-        AAAService aaaService = new AAAService();
 
-        User johnDoe; //Создаем пользователей
-        aaaService.addHash(johnDoe = new User("jdoe", aaaService.addSalt(), "sup3rpaZZ", 1));
-        User janeRow;
-        aaaService.addHash(janeRow = new User("jrow", aaaService.addSalt(), "Qweqrty12", 2));
+        User johnDoe = new User("jdoe", "sup3rpaZZ", 1); //Создаем пользователей
+        User janeRow = new User("jrow", "Qweqrty12", 2);
         ArrayList<User> users = new ArrayList<>(); //Создаем коллекцию пользователй
         users.add(johnDoe);
         users.add(janeRow);

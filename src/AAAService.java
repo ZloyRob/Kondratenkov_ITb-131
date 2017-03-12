@@ -1,5 +1,3 @@
-import org.apache.commons.lang3.RandomStringUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -91,14 +89,6 @@ public class AAAService {
     void addInJournal(ArrayList<Accounting> journal, UserInput us) {
         Accounting record = new Accounting(us.ds, us.de, us.vol, us.path, us.userId);
         journal.add(record);
-    }
-
-    String addSalt() {
-        return RandomStringUtils.randomAscii(7);
-    }
-
-    void addHash(User us) {
-        us.pass = md5Hex(md5Hex(us.pass) + us.salt);
     }
 
 
