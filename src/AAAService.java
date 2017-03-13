@@ -63,27 +63,31 @@ public class AAAService {
         return false;
     }
 
-    boolean isCheckDateAndVol(UserInput us) {
-        boolean dateVal = false;
-        boolean volVal = false;
+    boolean isCheckDate(UserInput us) {
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd") {{
             setLenient(false);
         }};
         try {
             us.ds = sdf.parse(us.dss);
             us.de = sdf.parse(us.des);
-            dateVal = true;
+            return true;
 
         } catch (Exception ignored) {
         }
+        return false;
+    }
+
+    boolean isCheckVol(UserInput us) {
+
         try {
             us.vol = Integer.valueOf(us.vols);
             if (us.vol > 0) {
-                volVal = true;
+                return true;
             }
         } catch (NumberFormatException ignored) {
         }
-        return dateVal & volVal;
+        return false;
     }
 
     void addInJournal(ArrayList<Accounting> journal, UserInput us) {

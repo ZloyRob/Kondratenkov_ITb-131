@@ -64,7 +64,7 @@ public class Validator {
 
     boolean isAccouting(ArrayList<Accounting> journal, UserInput us, boolean isAuthorization) {
         if (isAuthorization & us.dss != null) {
-            if (!aaaService.isCheckDateAndVol(us)) {
+            if (!aaaService.isCheckDate(us) & !aaaService.isCheckVol(us)) {
                 System.exit(5);
             }
             aaaService.addInJournal(journal, us);
