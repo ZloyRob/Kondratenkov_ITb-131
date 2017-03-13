@@ -1,6 +1,9 @@
 *.class
 *.xml
 Kondratenkov_Vadim.iml
-.idea/.name
+/idea/*
+/libs/*
+/out/*
+/src/META-INF/*
 *.jar
 *.MF
