@@ -1,7 +1,7 @@
 *.class
 *.xml
-*.xml
 Kondratenkov_Vadim.iml
+.idea/.name
 /idea/*
 /libs/*
 /out/*
