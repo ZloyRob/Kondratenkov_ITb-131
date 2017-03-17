@@ -10,7 +10,7 @@ answer=0
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -22,7 +22,7 @@ answer=0
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -34,7 +34,7 @@ answer=1
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -46,7 +46,7 @@ answer=2
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -58,7 +58,7 @@ answer=0
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -70,7 +70,7 @@ answer=0
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -82,7 +82,7 @@ answer=0
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -94,7 +94,7 @@ answer=3
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -106,7 +106,7 @@ answer=4
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -118,7 +118,7 @@ answer=4
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -130,7 +130,7 @@ answer=4
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -142,7 +142,7 @@ answer=0
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -154,7 +154,7 @@ answer=5
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -166,7 +166,7 @@ answer=5
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -178,7 +178,7 @@ answer=1
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
@@ -190,7 +190,7 @@ answer=1
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=0 #
+finalerror=1 #
 else #
 echo "0" #
 fi #
