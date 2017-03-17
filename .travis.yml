@@ -1,3 +1,2 @@
-#.travis.yml
 language: java
 build: ./TEST.sh
