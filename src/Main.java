@@ -2,8 +2,6 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Start Program");
-
         User johnDoe = new User("jdoe", "sup3rpaZZ", 1); //Создаем пользователей
         User janeRow = new User("jrow", "Qweqrty12", 2);
         ArrayList<User> users = new ArrayList<>(); //Создаем коллекцию пользователй
@@ -26,21 +24,11 @@ public class Main {
         valid.allocation(userInput, args);
 
         boolean isAuthentication = valid.isAuthentication(users, userInput);
-        if (isAuthentication) {
-            System.out.println("Authentication +");
-        }
-
         boolean isAuthorization = valid.isAuthorization(resources, userInput, isAuthentication);
-        if (isAuthorization) {
-            System.out.println("Authorization +");
-        }
+        valid.isAccouting(journal, userInput, isAuthorization);
 
-        if (valid.isAccouting(journal, userInput, isAuthorization)) {
-            System.out.println("Accouting +");
-            for (Accounting jour : journal) {
-                System.out.println(jour.toString());
-            }
-        }
     }
 }
+
+
 

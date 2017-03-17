@@ -3,8 +3,7 @@
 Kondratenkov_Vadim.iml
 .idea/.name
 /idea/*
-/libs/*
 /out/*
 /src/META-INF/*
-*.jar
+Kondratenkov_Vadim.jar
 *.MF
