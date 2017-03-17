@@ -1,6 +1,3 @@
 #.travis.yml
 language: java
-script:
- -TEST.sh
-after_success:
- - echo "Build was successful. $TRAVIS_TEST_RESULT"
+build: TEST.sh
