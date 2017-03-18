@@ -1,5 +1,5 @@
 #!/bin/bash
-./BUILD.sh #
+#./BUILD.sh #
 finalerror=0 #
 #
 echo "Start Test" #
