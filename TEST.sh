@@ -42,7 +42,7 @@ fi #
 ./RUN.sh "-login jdoe -pass XXX "
 error=$?
 echo "Test 4"
-answer=2
+answer=1
 if [[ $answer != $error ]] #
 then #
 echo "1" #
