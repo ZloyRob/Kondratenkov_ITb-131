@@ -1,4 +1,3 @@
-﻿<!DOCTYPE html>
 <html>
 <body>
 <h1>Kondratenkov_Vadim</h1>
