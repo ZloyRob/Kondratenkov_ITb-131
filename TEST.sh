@@ -1,199 +1,57 @@
 #!/bin/bash
-./BUILD.sh #
 finalerror=0 #
+goodTest=0 #
+badTest=0 #
 #
-echo "Start Test" #
-./RUN.sh ""
+function subTest { #
+echo "Test $2"
+answer=$3
+./RUN.sh "$1"
 error=$?
-echo "Test 1"
-answer=0
 if [[ $answer != $error ]] #
 then #
 echo "1" #
-finalerror=1 #
+((badTest++))#
+((finalerror=1)) #
 else #
 echo "0" #
+((goodTest++)) #
 fi #
+} #
 #
-./RUN.sh "-h "
-error=$?
-echo "Test 2"
-answer=0
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+echo "Start test"
 #
-./RUN.sh "-login XXX -pass XXX "
-error=$?
-echo "Test 3"
-answer=1
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest " " 1 0 #
 #
-./RUN.sh "-login jdoe -pass XXX "
-error=$?
-echo "Test 4"
-answer=2
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-h " 2 0 #
 #
-./RUN.sh "-login jdoe -pass sup3rpaZZ "
-error=$?
-echo "Test 5"
-answer=0
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login XXX -pass XXX " 3 1 #
 #
-./RUN.sh "-login jdoe -pass sup3rpaZZ -role READ -res a "
-error=$?
-echo "Test 6"
-answer=0
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass XXX " 4 2 #
 #
-./RUN.sh "-login jdoe -pass sup3rpaZZ -role READ -res a.b "
-error=$?
-echo "Test 7"
-answer=0
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass sup3rpaZZ " 5 0 #
 #
-./RUN.sh "-login jdoe -pass sup3rpaZZ -role XXX -res a.b "
-error=$?
-echo "Test 8"
-answer=3
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass sup3rpaZZ -role READ -res a " 6 0 #
 #
-./RUN.sh "-login jdoe -pass sup3rpaZZ -role READ -res XXX "
-error=$?
-echo "Test 9"
-answer=4
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass sup3rpaZZ -role READ -res a.b " 7 0 #
 #
-./RUN.sh "-login jdoe -pass sup3rpaZZ -role WRITE -res a "
-error=$?
-echo "Test 10"
-answer=4
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass sup3rpaZZ -role XXX -res a.b " 8 3 #
 #
-./RUN.sh "-login jdoe -pass sup3rpaZZ -role WRITE -res a.bc "
-error=$?
-echo "Test 11"
-answer=4
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass sup3rpaZZ -role READ -res XXX " 9 4 #
 #
-./RUN.sh "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol 100 "
-error=$?
-echo "Test 12"
-answer=0
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass sup3rpaZZ -role WRITE -res a " 10 4 #
 #
-./RUN.sh "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 01-01-2015 -de 2015-12-31 -vol 100 "
-error=$?
-echo "Test 13"
-answer=5
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass sup3rpaZZ -role WRITE -res a.bc " 11 4 #
 #
-./RUN.sh "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol XXX "
-error=$?
-echo "Test 14"
-answer=5
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol 100 " 12 0 #
 #
-./RUN.sh "-login X -pass X -role READ -res X -ds 2015-01-01 -de 2015-12-31 -vol XXX "
-error=$?
-echo "Test 15"
-answer=1
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 01-01-2015 -de 2015-12-31 -vol 100 " 13 5 #
 #
-./RUN.sh "-login X -pass X -role READ -res X "
-error=$?
-echo "Test 16"
-answer=1
-if [[ $answer != $error ]] #
-then #
-echo "1" #
-finalerror=1 #
-else #
-echo "0" #
-fi #
+subTest "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol XXX " 14 5 #
 #
-echo "Exit code $finalerror" #
+subTest "-login X -pass X -role READ -res X -ds 2015-01-01 -de 2015-12-31 -vol XXX " 15 1 #
+#
+subTest "-login X -pass X -role READ -res X " 16 1 #
+#
+echo "Exit code $finalerror goodTest $goodTest badTest $badTest" #
 exit $finalerror #
