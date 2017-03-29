@@ -7,6 +7,7 @@ public class UserInput {
     String role;
     String vols;
     int userId;
+    int resId;
     String dss;
     String des;
     int vol;

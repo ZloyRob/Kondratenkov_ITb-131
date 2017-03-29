@@ -1,3 +1,5 @@
+import org.apache.log4j.Logger;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -8,10 +10,13 @@ public class AAAService {
         READ, WRITE, EXECUTE
     }
 
+    //private static final Logger log = Logger.getLogger(AAAService.class);
+
     boolean isSearchUser(ArrayList<User> Users, UserInput us) {
         for (User user : Users) {
             if (us.login.equals(user.login)) {
                 us.userId = user.userId;
+               // log.info("Успех");
                 return true;
             }
         }
@@ -54,6 +59,7 @@ public class AAAService {
                 if (findPath.equals(resource.path)) { //находим нужный ресурс
                     if (us.userId == resource.usersId) { //проверям пользователя и роль
                         if (us.role.equals(resource.role)) {
+                            us.resId=resource.id;
                             return true;
                         }
                     }
@@ -91,7 +97,7 @@ public class AAAService {
     }
 
     void addInJournal(ArrayList<Accounting> journal, UserInput us) {
-        Accounting record = new Accounting(us.ds, us.de, us.vol, us.path, us.userId);
+        Accounting record = new Accounting(us.ds, us.de, us.vol, us.resId);
         journal.add(record);
     }
 

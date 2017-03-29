@@ -1,23 +1,23 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Accounting {
-    private Date ds;
-    private Date de;
-    private int vol;
-    private String res;
-    private int userId;
+     Date ds;
+     Date de;
+     int vol;
+     int resId;
 
-    public Accounting(Date ds, Date de, int vol, String res, int userId) {
+    public Accounting(Date ds, Date de, int vol, int resId) {
         this.ds = ds;
         this.de = de;
         this.vol = vol;
-        this.res = res;
-        this.userId = userId;
+        this.resId = resId;
     }
 
     public String toString() {
-        String formatString = "Пользователь: %d Ресурс: %s Объем: %d Дата начала: %s Дата окончания: %s";
-        return String.format(formatString, userId, res, vol, ds, de);
+        String formatString = "Ресурс: %d Объем: %d Дата начала: %s Дата окончания: %s";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return String.format(formatString, resId, vol, sdf.format(ds),sdf.format(de));
     }
 
 }
