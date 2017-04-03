@@ -16,6 +16,13 @@ User {
         this.userId = userId;
 
     }
+    public User(String login, String pass, int userId, String salt ) {
+        this.login = login;
+        this.salt = salt;
+        this.pass = pass;
+        this.userId = userId;
+
+    }
 
     private String addSalt() {
         return RandomStringUtils.randomAscii(7);
