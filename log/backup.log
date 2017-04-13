@@ -1,0 +1,9 @@
+13-04-2017 17:31:28 [INFO ][Validator           ] [allocation          :41] - Тест1
+13-04-2017 17:31:28 [INFO ][Validator           ] [isAuthentication    :52] - Тест2
+13-04-2017 17:31:28 [INFO ][Validator           ] [isAuthorization     :64] - Тест3
+13-04-2017 17:33:23 [INFO ][Validator ] [allocation:41] - Тест1
+13-04-2017 17:33:23 [INFO ][Validator ] [isAuthentication:52] - Тест2
+13-04-2017 17:33:23 [INFO ][Validator ] [isAuthorization:64] - Тест3
+13-04-2017 17:34:02 [INFO ][Validator] [allocation:41] - Тест1
+13-04-2017 17:34:02 [INFO ][Validator] [isAuthentication:52] - Тест2
+13-04-2017 17:34:02 [INFO ][Validator] [isAuthorization:64] - Тест3

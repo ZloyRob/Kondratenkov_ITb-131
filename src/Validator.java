@@ -1,4 +1,6 @@
 import org.apache.commons.cli.*;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 
@@ -6,6 +8,7 @@ public class Validator {
     private AAAService aaaService = new AAAService();
     private CommandLineParser parser = new DefaultParser();
     private Options opt = new Options();
+    private static final Logger log = LogManager.getLogger(Validator.class.getName());
 
     UserInput allocation(UserInput us, String[] args) {
         opt.addOption("l", "login", true, "Login");
@@ -35,6 +38,7 @@ public class Validator {
             fo.printHelp("Help", opt);
             System.exit(0);
         }
+        log.info("Тест1");
         return us;
     }
 
@@ -45,6 +49,7 @@ public class Validator {
         if (!aaaService.isCheckPass(Users, us)) {
             System.exit(2);
         }
+        log.info("Тест2");
         return true;
     }
 
@@ -56,6 +61,7 @@ public class Validator {
             if (!aaaService.isCheckAccess(Res, us)) {
                 System.exit(4);
             }
+            log.info("Тест3");
             return true;
         } else {
             return false;
@@ -73,4 +79,16 @@ public class Validator {
             return false;
         }
     }
+    /*public void logMessages() {
+        log.debug("debug"); // all
+        log.info("info"); // except debug
+        log.warn("warn"); // except debug and info
+        log.error("error"); // except debug, info and warn
+        log.fatal("fatal"); // only fatal
+        try {
+            throw new Exception("test exception");
+        } catch (Exception e) {
+            log.error("exception", e);
+        }
+    }*/
 }

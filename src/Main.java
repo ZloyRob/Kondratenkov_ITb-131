@@ -3,10 +3,12 @@ import org.flywaydb.core.Flyway;
 import java.sql.*;
 import java.util.ArrayList;
 
+
 public class Main {
     public static void main(String[] args) {
 
         Flyway flyway = new Flyway();
+
         Connection dbConnection=null;
         flyway.setDataSource("jdbc:h2:file:./res/db/Vadim", "Vadim", "123");
         try {
@@ -57,6 +59,7 @@ public class Main {
             boolean isAuthorization = valid.isAuthorization(resources, userInput, isAuthentication);
 
             valid.isAccouting(journal, userInput, isAuthorization);
+
 
         } catch (Exception e) {
             e.printStackTrace();
