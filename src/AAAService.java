@@ -1,5 +1,8 @@
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -9,17 +12,16 @@ public class AAAService {
     enum Roles {
         READ, WRITE, EXECUTE
     }
-
-    //private static final Logger log = Logger.getLogger(AAAService.class);
-
+    private static final Logger log = LogManager.getLogger(AAAService.class.getName());
     boolean isSearchUser(ArrayList<User> Users, UserInput us) {
         for (User user : Users) {
             if (us.login.equals(user.login)) {
                 us.userId = user.userId;
-               // log.info("Успех");
+                log.info("Пользователь найден");
                 return true;
             }
         }
+        log.error(String.format("Пользователь %s не найден", us.login));
         return false;
     }
 
@@ -27,10 +29,12 @@ public class AAAService {
         for (User user : Users) {
             if (us.userId == user.userId) {
                 if (md5Hex(md5Hex(us.pass) + user.salt).equals(user.pass)) {
+                    log.info("Пароль верен");
                     return true;
                 }
             }
         }
+        log.error(String.format("Пароль %s не подходит к пользователю %s", us.pass, us.login));
         return false;
     }
 
@@ -38,9 +42,11 @@ public class AAAService {
         Roles[] allrole = Roles.values();
         for (Roles allroles : allrole) {
             if (us.role.equals(allroles.toString())) {
+                log.info("Роль соответствует коллекции");
                 return true;
             }
         }
+        log.error("Роль не соответствует коллекции");
         return false;
     }
 
@@ -60,12 +66,14 @@ public class AAAService {
                     if (us.userId == resource.usersId) { //проверям пользователя и роль
                         if (us.role.equals(resource.role)) {
                             us.resId=resource.id;
+                            log.info(String.format("Доступ к ресурсу %s разрешен", us.path));
                             return true;
                         }
                     }
                 }
             }
         }
+        log.error(String.format("Доступ к ресурсу %s запрещен", us.path));
         return false;
     }
 
@@ -77,10 +85,12 @@ public class AAAService {
         try {
             us.ds = sdf.parse(us.dss);
             us.de = sdf.parse(us.des);
+            log.info("Дата валидна");
             return true;
 
         } catch (Exception ignored) {
         }
+        log.error("Дата не валидна");
         return false;
     }
 
@@ -89,10 +99,12 @@ public class AAAService {
         try {
             us.vol = Integer.valueOf(us.vols);
             if (us.vol > 0) {
+                log.info("Объем валиден");
                 return true;
             }
         } catch (NumberFormatException ignored) {
         }
+        log.error(String.format("Объем не валиден(%s)", us.vol));
         return false;
     }
 

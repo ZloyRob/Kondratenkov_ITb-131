@@ -31,37 +31,44 @@ public class Validator {
             if (line.hasOption("h") || null == us.login || null == us.pass) {
                 HelpFormatter fo = new HelpFormatter();
                 fo.printHelp("Help", opt);
+                log.info("Exit 0");
                 System.exit(0);
             }
         } catch (ParseException exp) {
             HelpFormatter fo = new HelpFormatter();
             fo.printHelp("Help", opt);
+            log.error("Неизвестные параметры");
+            log.info("Exit 0");
             System.exit(0);
         }
-        log.info("Тест1");
+
         return us;
     }
 
     boolean isAuthentication(ArrayList<User> Users, UserInput us) {
         if (!aaaService.isSearchUser(Users, us)) {
+            log.info("Exit 1");
             System.exit(1);
         }
         if (!aaaService.isCheckPass(Users, us)) {
+            log.info("Exit 2");
             System.exit(2);
         }
-        log.info("Тест2");
+        log.info("Аутентификация пройдена");
         return true;
     }
 
     boolean isAuthorization(ArrayList<Resource> Res, UserInput us, boolean isAuthentication) {
         if (isAuthentication & us.role != null & us.path != null) {
             if (!aaaService.isCheckRole(us)) {
+                log.info("Exit 3");
                 System.exit(3);
             }
             if (!aaaService.isCheckAccess(Res, us)) {
+                log.info("Exit 4");
                 System.exit(4);
             }
-            log.info("Тест3");
+            log.info("Авторизация пройдена");
             return true;
         } else {
             return false;
@@ -71,24 +78,14 @@ public class Validator {
     boolean isAccouting(ArrayList<Accounting> journal, UserInput us, boolean isAuthorization) {
         if (isAuthorization & us.dss != null) {
             if (!aaaService.isCheckDate(us) || !aaaService.isCheckVol(us)) {
+                log.info("Exit 5");
                 System.exit(5);
             }
             aaaService.addInJournal(journal, us);
+            log.info("Аккаунтинг пройден");
             return true;
         } else {
             return false;
         }
     }
-    /*public void logMessages() {
-        log.debug("debug"); // all
-        log.info("info"); // except debug
-        log.warn("warn"); // except debug and info
-        log.error("error"); // except debug, info and warn
-        log.fatal("fatal"); // only fatal
-        try {
-            throw new Exception("test exception");
-        } catch (Exception e) {
-            log.error("exception", e);
-        }
-    }*/
 }
