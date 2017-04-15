@@ -57,6 +57,7 @@ public class Main {
         try {
             dbConnection = getDBConnection();
 
+
             boolean isAuthentication = valid.isAuthentication(users, userInput);
 
             boolean isAuthorization = valid.isAuthorization(resources, userInput, isAuthentication);

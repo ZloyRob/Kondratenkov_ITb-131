@@ -12,3 +12,4 @@ manifest.txt
 res/db/Vadim.mv.db
 log/aaa.log
 res/db/Vadim.mv.db
+!res/log4j2.xml
