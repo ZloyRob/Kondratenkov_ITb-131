@@ -13,27 +13,27 @@ public class AAAService {
         READ, WRITE, EXECUTE
     }
     private static final Logger log = LogManager.getLogger(AAAService.class.getName());
-    boolean isSearchUser(ArrayList<User> Users, UserInput us) {
-        for (User user : Users) {
-            if (us.login.equals(user.login)) {
-                us.userId = user.userId;
+    boolean isSearchUser(User usbd, UserInput us) {
+        //for (User user : Users) {
+            if (us.login.equals(usbd.login)) {
+                us.userId = usbd.userId;
                 log.info("Пользователь найден");
                 return true;
             }
-        }
+        //}
         log.error(String.format("Пользователь %s не найден", us.login));
         return false;
     }
 
-    boolean isCheckPass(ArrayList<User> Users, UserInput us) {
-        for (User user : Users) {
-            if (us.userId == user.userId) {
-                if (md5Hex(md5Hex(us.pass) + user.salt).equals(user.pass)) {
+    boolean isCheckPass(User usbd, UserInput us) {
+        //for (User user : Users) {
+            if (us.userId == usbd.userId) {
+                if (md5Hex(md5Hex(us.pass) + usbd.salt).equals(usbd.pass)) {
                     log.info("Пароль верен");
                     return true;
                 }
             }
-        }
+       // }
         log.error(String.format("Пароль %s не подходит к пользователю %s", us.pass, us.login));
         return false;
     }
@@ -108,9 +108,11 @@ public class AAAService {
         return false;
     }
 
-    void addInJournal(ArrayList<Accounting> journal, UserInput us) {
-        Accounting record = new Accounting(us.ds, us.de, us.vol, us.resId);
-        journal.add(record);
+    void addInJournal(Accounting journal, UserInput us) {
+        journal.ds = us.ds;
+        journal.de = us.de;
+        journal.vol = us.vol;
+        journal.resId = us.resId;
     }
 
 

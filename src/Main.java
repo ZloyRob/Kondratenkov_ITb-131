@@ -19,19 +19,16 @@ public class Main {
         } catch (Exception e) {
             flyway.baseline();
         }
-
-
-        ArrayList<User> users = new ArrayList<>(); //Создаем коллекцию пользователй
+       /* ArrayList<User> users = new ArrayList<>(); //Создаем коллекцию пользователй
 
         ArrayList<Resource> resources = new ArrayList<>(); //Создаем коллекцию ресурсов
 
 
-        ArrayList<Accounting> journal = new ArrayList<>(); //список всех сессий
-
+        ArrayList<Accounting> journal = new ArrayList<>(); //список всех сессий*/
         UserInput userInput = new UserInput();
         Validator valid = new Validator();
         valid.allocation(userInput, args);
-        try {
+       /* try {
             dbConnection = getDBConnection();
             Statement statement = dbConnection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM USER");
@@ -53,15 +50,21 @@ public class Main {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         try {
             dbConnection = getDBConnection();
-
-
-            boolean isAuthentication = valid.isAuthentication(users, userInput);
-
+            Statement statement = dbConnection.createStatement();
+            ResultSet result = statement.executeQuery( String.format("SELECT * FROM USER WHERE (USER.LOGIN LIKE '%s')", userInput.login));
+            User usbd = new User(result.getString("LOGIN"), result.getString("PASS"), Integer.valueOf(result.getString("ID")),result.getString("SALT"));
+            boolean isAuthentication = valid.isAuthentication(usbd, userInput);
+            String[] masOfPath = userInput.path.split("\\."); //разбиваем путь по уровням
+            result = statement.executeQuery(String.format("SELECT * FROM RESOURCE where path like '%s%'", masOfPath[0]));
+            ArrayList<Resource> resources = new ArrayList<>();
+            while (result.next()) {
+                resources.add(new Resource(result.getString("PATH"), Integer.valueOf(result.getString("USERID")),result.getString("ROLE"), Integer.valueOf(result.getString("ID"))));
+            }
             boolean isAuthorization = valid.isAuthorization(resources, userInput, isAuthentication);
-
+            Accounting journal = new Accounting();
             valid.isAccouting(journal, userInput, isAuthorization);
 
 

@@ -45,12 +45,12 @@ public class Validator {
         return us;
     }
 
-    boolean isAuthentication(ArrayList<User> Users, UserInput us) {
-        if (!aaaService.isSearchUser(Users, us)) {
+    boolean isAuthentication(User usbd, UserInput us) {
+        if (!aaaService.isSearchUser(usbd, us)) {
             log.info("Exit 1");
             System.exit(1);
         }
-        if (!aaaService.isCheckPass(Users, us)) {
+        if (!aaaService.isCheckPass(usbd, us)) {
             log.info("Exit 2");
             System.exit(2);
         }
@@ -75,7 +75,7 @@ public class Validator {
         }
     }
 
-    boolean isAccouting(ArrayList<Accounting> journal, UserInput us, boolean isAuthorization) {
+    boolean isAccouting(Accounting journal, UserInput us, boolean isAuthorization) {
         if (isAuthorization & us.dss != null) {
             if (!aaaService.isCheckDate(us) || !aaaService.isCheckVol(us)) {
                 log.info("Exit 5");
