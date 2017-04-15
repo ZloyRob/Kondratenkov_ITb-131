@@ -11,7 +11,6 @@ Kondratenkov_Vadim.jar
 manifest.txt
 res/db/Vadim.mv.db
 log/aaa.log
-res/db/Vadim.mv.db
 !res/log4j2.xml
 res/db/Vadim.trace.db
-res/db/Vadim.mv.db
+
