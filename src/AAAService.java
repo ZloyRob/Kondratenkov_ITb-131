@@ -1,10 +1,7 @@
-
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
@@ -12,28 +9,30 @@ public class AAAService {
     enum Roles {
         READ, WRITE, EXECUTE
     }
+
     private static final Logger log = LogManager.getLogger(AAAService.class.getName());
+
     boolean isSearchUser(User usbd, UserInput us) {
-        //for (User user : Users) {
-            if (us.login.equals(usbd.login)) {
-                us.userId = usbd.userId;
-                log.info("Пользователь найден");
-                return true;
-            }
-        //}
+
+        if (us.login.equals(usbd.login)) {
+            us.userId = usbd.userId;
+            log.info("Пользователь найден");
+            return true;
+        }
+
         log.error(String.format("Пользователь %s не найден", us.login));
         return false;
     }
 
     boolean isCheckPass(User usbd, UserInput us) {
-        //for (User user : Users) {
-            if (us.userId == usbd.userId) {
-                if (md5Hex(md5Hex(us.pass) + usbd.salt).equals(usbd.pass)) {
-                    log.info("Пароль верен");
-                    return true;
-                }
+
+        if (us.userId == usbd.userId) {
+            if (md5Hex(md5Hex(us.pass) + usbd.salt).equals(usbd.pass)) {
+                log.info("Пароль верен");
+                return true;
             }
-       // }
+        }
+
         log.error(String.format("Пароль %s не подходит к пользователю %s", us.pass, us.login));
         return false;
     }
@@ -50,18 +49,13 @@ public class AAAService {
         return false;
     }
 
-    /**
-     * Метод проверяет разрешен ли пользователю доступ к ресурсу
-     * Поиск происходит начиная с головы пути ресурса и с каждой итерацией спускается все ниже
-     *
-     * @return Возвращается true если доступ разрешен
-     */
+
     boolean isCheckAccess(Resource res, UserInput us) {
-        if (us.path.equals(res.path)) { //находим нужный ресурс
-                    us.resId = res.id;
-                    log.info(String.format("Доступ к ресурсу %s разрешен", us.path));
-                    return true;
-                }
+        if (us.path.equals(res.path)) { //проверяем не вернулся ли пустой ресурс
+            us.resId = res.id;
+            log.info(String.format("Доступ к ресурсу %s разрешен", us.path));
+            return true;
+        }
         log.error(String.format("Доступ к ресурсу %s запрещен", us.path));
         return false;
     }

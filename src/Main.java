@@ -3,7 +3,6 @@ import org.apache.logging.log4j.Logger;
 import org.flywaydb.core.Flyway;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 
 
 public class Main {

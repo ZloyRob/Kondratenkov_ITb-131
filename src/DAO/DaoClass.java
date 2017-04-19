@@ -1,7 +1,5 @@
-
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 class DaoClass {
     Connection getDBConnection() {
@@ -44,24 +42,24 @@ class DaoClass {
         try {
             Statement statement = dbConnection.createStatement();
             String[] masOfPath = userInput.path.split("\\."); //разбиваем путь по уровням
-            boolean access=false;
+            boolean access = false;
             String findPath = "";
             for (String string : masOfPath) {
                 findPath += string; //опускаемся на уровень ниже
                 {
                     ResultSet result = statement.executeQuery(String.format("SELECT * FROM RESOURCE where path like '%s", findPath)
-                            + String.format("' and role like '%s", userInput.role) + String.format("' and userid like '%s", userInput.userId) +"'");
-                    if (result.next()){
-                        access=true;
+                            + String.format("' and role like '%s", userInput.role) + String.format("' and userid like '%s", userInput.userId) + "'");
+                    if (result.next()) { //проверяем вернулся ли хоть 1 ресурс с таким доступом
+                        access = true;
                         break;
                     }
                 }
             }
             if (access) {
-                ResultSet result = statement.executeQuery(String.format("SELECT * FROM RESOURCE where path like '%s", userInput.path) + "'");
+                ResultSet result = statement.executeQuery(String.format("SELECT * FROM RESOURCE where path like '%s", userInput.path) + "'"); //получаем тот ресурс который запрашивали
                 Resource resource = new Resource();
                 while (result.next()) {
-                    resource = (new Resource(result.getString("PATH"), Integer.valueOf(result.getString("USERID")), result.getString("ROLE"), Integer.valueOf(result.getString("ID"))));
+                    resource = (new Resource(result.getString("PATH"), Integer.valueOf(result.getString("ID"))));
                 }
                 return resource;
             }
