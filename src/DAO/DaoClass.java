@@ -50,7 +50,7 @@ class DaoClass {
                 findPath += string; //опускаемся на уровень ниже
                 {
                     ResultSet result = statement.executeQuery(String.format("SELECT * FROM RESOURCE where path like '%s", findPath)
-                            + String.format("' and role like '%s", userInput.role) +"'"+ String.format("' and userid like '%s", userInput.userId) +"'");
+                            + String.format("' and role like '%s", userInput.role) + String.format("' and userid like '%s", userInput.userId) +"'");
                     if (result.next()){
                         access=true;
                         break;

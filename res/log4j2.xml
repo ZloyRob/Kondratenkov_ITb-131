@@ -5,19 +5,16 @@
             <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss} %p: %msg -- %l %n"/>
         </Console>
         <!-- Файловый аппендер -->
-        <RollingFile name="RollingFile" fileName=".\log\aaa.log">
+        <File name="file" fileName=".\log\aaa.log">
             <PatternLayout>
                 <Pattern>%d{dd-MM-yyyy HH:mm:ss} [%-5p][%-1c{1}] [%-1M:%L] - %msg%n</Pattern>
             </PatternLayout>
-	    <Policies>
-		<SizeBasedTriggeringPolicy size="100 MB" />
-	    </Policies>
-        </RollingFile>
+        </File>
     </Appenders>
     <Loggers>
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="file"/>
         </Root>
     </Loggers>
 </Configuration>
