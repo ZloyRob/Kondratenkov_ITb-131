@@ -40,20 +40,35 @@ class DaoClass {
         return new User();
     }
 
-    ArrayList<Resource> getResourceFromBase(UserInput userInput, Connection dbConnection) {
+    Resource getResourceFromBase(UserInput userInput, Connection dbConnection) {
         try {
             Statement statement = dbConnection.createStatement();
             String[] masOfPath = userInput.path.split("\\."); //разбиваем путь по уровням
-            ResultSet result = statement.executeQuery(String.format("SELECT * FROM RESOURCE where path like '%s", masOfPath[0]) + "%'");
-            ArrayList<Resource> resources = new ArrayList<>();
-            while (result.next()) {
-                resources.add(new Resource(result.getString("PATH"), Integer.valueOf(result.getString("USERID")), result.getString("ROLE"), Integer.valueOf(result.getString("ID"))));
+            boolean access=false;
+            String findPath = "";
+            for (String string : masOfPath) {
+                findPath += string; //опускаемся на уровень ниже
+                {
+                    ResultSet result = statement.executeQuery(String.format("SELECT * FROM RESOURCE where path like '%s", findPath)
+                            + String.format("' and role like '%s", userInput.role) +"'"+ String.format("' and userid like '%s", userInput.userId) +"'");
+                    if (result.next()){
+                        access=true;
+                        break;
+                    }
+                }
             }
-            return resources;
+            if (access) {
+                ResultSet result = statement.executeQuery(String.format("SELECT * FROM RESOURCE where path like '%s", userInput.path) + "'");
+                Resource resource = new Resource();
+                while (result.next()) {
+                    resource = (new Resource(result.getString("PATH"), Integer.valueOf(result.getString("USERID")), result.getString("ROLE"), Integer.valueOf(result.getString("ID"))));
+                }
+                return resource;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new ArrayList<>();
+        return new Resource();
     }
 
     void insertRecordIntoDataBase(Connection dbConnection, Accounting journal) {

@@ -56,23 +56,12 @@ public class AAAService {
      *
      * @return Возвращается true если доступ разрешен
      */
-    boolean isCheckAccess(ArrayList<Resource> Res, UserInput us) {
-        String[] masOfPath = us.path.split("\\."); //разбиваем путь по уровням
-        String findPath = "";
-        for (String string : masOfPath) {
-            findPath += string; //опускаемся на уровень ниже
-            for (Resource resource : Res) {
-                if (findPath.equals(resource.path)) { //находим нужный ресурс
-                    if (us.userId == resource.usersId) { //проверям пользователя и роль
-                        if (us.role.equals(resource.role)) {
-                            us.resId=resource.id;
-                            log.info(String.format("Доступ к ресурсу %s разрешен", us.path));
-                            return true;
-                        }
-                    }
+    boolean isCheckAccess(Resource res, UserInput us) {
+        if (us.path.equals(res.path)) { //находим нужный ресурс
+                    us.resId = res.id;
+                    log.info(String.format("Доступ к ресурсу %s разрешен", us.path));
+                    return true;
                 }
-            }
-        }
         log.error(String.format("Доступ к ресурсу %s запрещен", us.path));
         return false;
     }

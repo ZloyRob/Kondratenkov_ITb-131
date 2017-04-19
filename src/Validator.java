@@ -58,7 +58,7 @@ public class Validator {
         return true;
     }
 
-    boolean isAuthorization(ArrayList<Resource> Res, UserInput us, boolean isAuthentication) {
+    boolean isAuthorization(Resource Res, UserInput us, boolean isAuthentication) {
         if (isAuthentication & us.role != null & us.path != null) {
             if (!aaaService.isCheckRole(us)) {
                 log.info("Exit 3");

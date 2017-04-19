@@ -32,8 +32,8 @@ public class Main {
             User usbd = dao.getUserFromDataBase(userInput, dbConnection);
             boolean isAuthentication = valid.isAuthentication(usbd, userInput);
 
-            ArrayList<Resource> resources = dao.getResourceFromBase(userInput, dbConnection);
-            boolean isAuthorization = valid.isAuthorization(resources, userInput, isAuthentication);
+            Resource resource = dao.getResourceFromBase(userInput, dbConnection);
+            boolean isAuthorization = valid.isAuthorization(resource, userInput, isAuthentication);
 
             Accounting journal = new Accounting();
             if (valid.isAccouting(journal, userInput, isAuthorization)) {
