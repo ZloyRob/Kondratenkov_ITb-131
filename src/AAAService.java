@@ -71,9 +71,10 @@ public class AAAService {
             log.info("Дата валидна");
             return true;
 
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            log.error(String.format("Дата не валидна(%s)", e.getMessage()));
         }
-        log.error("Дата не валидна");
+
         return false;
     }
 
@@ -81,13 +82,16 @@ public class AAAService {
 
         try {
             us.vol = Integer.valueOf(us.vols);
-            if (us.vol > 0) {
-                log.info("Объем валиден");
-                return true;
-            }
-        } catch (NumberFormatException ignored) {
+
+        } catch (NumberFormatException e) {
+            log.error(String.format("Объем не валиден(%s)", e.getMessage()));
+            return false;
         }
-        log.error(String.format("Объем не валиден(%s)", us.vol));
+        if (us.vol > 0) {
+            log.info("Объем валиден");
+            return true;
+        }
+        log.error(String.format("Объем отрицателен(%s)", us.vols));
         return false;
     }
 

@@ -29,9 +29,9 @@ class DaoClass {
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet result = statement.executeQuery(String.format("SELECT * FROM USER WHERE (USER.LOGIN LIKE '%s')", userInput.login));
-            result.next();
-            return new User(result.getString("LOGIN"), result.getString("PASS"), Integer.valueOf(result.getString("ID")), result.getString("SALT"));
-
+            if(result.next()) {
+                return new User(result.getString("LOGIN"), result.getString("PASS"), Integer.valueOf(result.getString("ID")), result.getString("SALT"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -41,6 +41,9 @@ class DaoClass {
     Resource getResourceFromBase(UserInput userInput, Connection dbConnection) {
         try {
             Statement statement = dbConnection.createStatement();
+            if (userInput.path==null) {
+            return new Resource();
+            }
             String[] masOfPath = userInput.path.split("\\."); //разбиваем путь по уровням
             boolean access = false;
             String findPath = "";
