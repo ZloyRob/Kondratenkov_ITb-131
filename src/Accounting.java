@@ -22,7 +22,17 @@ public class Accounting {
     public String toString() {
         String formatString = "Ресурс: %d Объем: %d Дата начала: %s Дата окончания: %s";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return String.format(formatString, resId, vol, sdf.format(ds),sdf.format(de));
+        return String.format(formatString, resId, vol, sdf.format(ds), sdf.format(de));
+    }
+
+    String getDs() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(ds);
+    }
+
+    String getDe() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(de);
     }
 
 }

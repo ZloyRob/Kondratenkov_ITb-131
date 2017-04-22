@@ -28,18 +28,18 @@ public class Main {
         try {
             dbConnection = dao.getDBConnection();
 
-            User usbd = dao.getUserFromDataBase(userInput, dbConnection);
-            boolean isAuthentication = valid.isAuthentication(usbd, userInput);
 
-            Resource resource = dao.getResourceFromBase(userInput, dbConnection);
-            boolean isAuthorization = valid.isAuthorization(resource, userInput, isAuthentication);
+            boolean isAuthentication = valid.isAuthentication(dao.getUserFromDataBase(userInput, dbConnection), userInput);
+
+
+            boolean isAuthorization = valid.isAuthorization(dao.getResourceFromBase(userInput, dbConnection), userInput, isAuthentication);
 
             Accounting journal = new Accounting();
             if (valid.isAccouting(journal, userInput, isAuthorization)) {
                 dao.insertRecordIntoDataBase(dbConnection, journal);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.debug(e);
         } finally {
             dao.closeConnection(dbConnection);
         }

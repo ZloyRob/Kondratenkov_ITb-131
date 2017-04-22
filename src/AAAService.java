@@ -12,18 +12,6 @@ public class AAAService {
 
     private static final Logger log = LogManager.getLogger(AAAService.class.getName());
 
-    boolean isSearchUser(User usbd, UserInput us) {
-
-        if (us.login.equals(usbd.login)) {
-            us.userId = usbd.userId;
-            log.info("Пользователь найден");
-            return true;
-        }
-
-        log.error(String.format("Пользователь %s не найден", us.login));
-        return false;
-    }
-
     boolean isCheckPass(User usbd, UserInput us) {
 
         if (us.userId == usbd.userId) {
@@ -33,7 +21,7 @@ public class AAAService {
             }
         }
 
-        log.error(String.format("Пароль %s не подходит к пользователю %s", us.pass, us.login));
+        log.error("Пароль {} не подходит к пользователю {}", us.pass, us.login);
         return false;
     }
 
@@ -45,18 +33,7 @@ public class AAAService {
                 return true;
             }
         }
-        log.error("Роль не соответствует коллекции");
-        return false;
-    }
-
-
-    boolean isCheckAccess(Resource res, UserInput us) {
-        if (us.path.equals(res.path)) { //проверяем не вернулся ли пустой ресурс
-            us.resId = res.id;
-            log.info(String.format("Доступ к ресурсу %s разрешен", us.path));
-            return true;
-        }
-        log.error(String.format("Доступ к ресурсу %s запрещен", us.path));
+        log.error("Роль - {} не соответствует коллекции", us.role);
         return false;
     }
 
@@ -72,10 +49,9 @@ public class AAAService {
             return true;
 
         } catch (Exception e) {
-            log.error(String.format("Дата не валидна(%s)", e.getMessage()));
+            log.error(e);
+            return false;
         }
-
-        return false;
     }
 
     boolean isCheckVol(UserInput us) {
@@ -84,14 +60,14 @@ public class AAAService {
             us.vol = Integer.valueOf(us.vols);
 
         } catch (NumberFormatException e) {
-            log.error(String.format("Объем не валиден(%s)", e.getMessage()));
+            log.error(e);
             return false;
         }
         if (us.vol > 0) {
             log.info("Объем валиден");
             return true;
         }
-        log.error(String.format("Объем отрицателен(%s)", us.vols));
+        log.error("Объем отрицателен {}", us.vols);
         return false;
     }
 

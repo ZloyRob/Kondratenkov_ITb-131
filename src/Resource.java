@@ -1,13 +1,11 @@
 
 class Resource {
-    String path;
     int id;
 
     Resource() {
     }
 
-    Resource(String path, int id) {
-        this.path = path;
+    Resource(int id) {
         this.id = id;
 
     }

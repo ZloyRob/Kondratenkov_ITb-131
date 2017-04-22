@@ -39,14 +39,15 @@ public class Validator {
             log.info("Exit 0");
             System.exit(0);
         }
-
         return us;
     }
 
     boolean isAuthentication(User usbd, UserInput us) {
-        if (!aaaService.isSearchUser(usbd, us)) {
+        if (usbd == null) {
             log.info("Exit 1");
             System.exit(1);
+        } else {
+            us.userId = usbd.userId;
         }
         if (!aaaService.isCheckPass(usbd, us)) {
             log.info("Exit 2");
@@ -62,10 +63,13 @@ public class Validator {
                 log.info("Exit 3");
                 System.exit(3);
             }
-            if (!aaaService.isCheckAccess(Res, us)) {
+            if (Res == null) {
                 log.info("Exit 4");
                 System.exit(4);
+            } else {
+                us.resId = Res.id;
             }
+
             log.info("Авторизация пройдена");
             return true;
         } else {
