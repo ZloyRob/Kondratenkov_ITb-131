@@ -1,12 +1,13 @@
+package main.java;
 import java.util.Date;
 
 public class UserInput {
-    String login;
+   public String login;
     String pass;
-    String path;
-    String role;
+    public String path;
+    public String role;
     String vols;
-    int userId;
+    public int userId;
     int resId;
     String dss;
     String des;

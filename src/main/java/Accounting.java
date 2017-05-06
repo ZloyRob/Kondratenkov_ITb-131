@@ -1,11 +1,12 @@
+package main.java;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Accounting {
     Date ds;
     Date de;
-    int vol;
-    int resId;
+    public int vol;
+    public int resId;
 
     public Accounting() {
 
@@ -25,12 +26,12 @@ public class Accounting {
         return String.format(formatString, resId, vol, sdf.format(ds), sdf.format(de));
     }
 
-    String getDs() {
+    public String getDs() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(ds);
     }
 
-    String getDe() {
+    public String getDe() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(de);
     }

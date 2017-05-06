@@ -1,12 +1,14 @@
+package main.java.DAO;
+import main.java.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
-class DaoClass {
+public class DaoClass {
     private static final Logger log = LogManager.getLogger(DaoClass.class.getName());
 
-    Connection getDBConnection() {
+    public Connection getDBConnection() {
         try {
             Class.forName("org.h2.Driver");
         } catch (ClassNotFoundException e) {
@@ -21,7 +23,7 @@ class DaoClass {
         }
     }
 
-    void closeConnection(Connection dbConnection) {
+    public void closeConnection(Connection dbConnection) {
         try {
             dbConnection.close();
         } catch (SQLException e) {
@@ -29,7 +31,7 @@ class DaoClass {
         }
     }
 
-    User getUserFromDataBase(UserInput userInput, Connection dbConnection) {
+    public User getUserFromDataBase(UserInput userInput, Connection dbConnection) {
         try {
             PreparedStatement statement = dbConnection.prepareStatement("SELECT * FROM USER WHERE (USER.LOGIN LIKE ?)");
             statement.setString(1, userInput.login);
@@ -45,7 +47,7 @@ class DaoClass {
         return null;
     }
 
-    Resource getResourceFromBase(UserInput userInput, Connection dbConnection) {
+    public Resource getResourceFromBase(UserInput userInput, Connection dbConnection) {
         try {
             PreparedStatement statement;
             ResultSet result;
@@ -88,7 +90,7 @@ class DaoClass {
         return null;
     }
 
-    void insertRecordIntoDataBase(Connection dbConnection, Accounting journal) {
+    public void insertRecordIntoDataBase(Connection dbConnection, Accounting journal) {
         try {
             PreparedStatement statement = dbConnection.prepareStatement("Insert into ACCOUNTING (DS, DE , VOL, RESID ) VALUES (?, ?, ?, ?)");
             statement.setDate(1, Date.valueOf(journal.getDs()));

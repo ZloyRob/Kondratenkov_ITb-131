@@ -1,5 +1,5 @@
+package main.java;
 import org.apache.commons.lang3.RandomStringUtils;
-
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
 public class

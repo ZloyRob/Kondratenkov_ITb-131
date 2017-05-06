@@ -4,6 +4,7 @@ Kondratenkov_Vadim.iml
 .idea/.name
 /idea/*
 /out/*
+/target/*
 /src/META-INF/*
 *.MF
 Kondratenkov_Vadim.jar
