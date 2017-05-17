@@ -78,12 +78,13 @@ public class Validator {
 
     public int isAuthenticationTest(User usbd, UserInput us) {
         if (usbd == null) {
+            log.error("Пользователь - {} не найден", us.login);
             return 1;
         } else {
             us.userId = usbd.userId;
         }
         if (!aaaService.isCheckPass(usbd, us)) {
-
+            log.error("Пароль - {} не подходит {}", us.pass, us.login);
             return 2;
         }
         return 0;
@@ -114,8 +115,10 @@ public class Validator {
             return 3;
         }
         if (Res == null) {
+            log.error("Доступ к ресурсу - {} запрещен", us.path);
             return 4;
         }
+        log.info("Авторизация пройдена");
         return 0;
     }
 
@@ -138,6 +141,7 @@ public class Validator {
 
             return 5;
         }
+        log.info("Аккаунтинг пройден");
         return 0;
     }
 
