@@ -1,5 +1,4 @@
 language: java
-before_script: mvn package
-script: ./TEST.sh
+script: mvn test -B
 jdk:
   - oraclejdk8

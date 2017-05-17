@@ -1,5 +1,9 @@
-package main.java.DAO;
-import main.java.*;
+package DAO;
+
+import Models.Accounting;
+import Models.Resource;
+import Models.User;
+import Models.UserInput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
