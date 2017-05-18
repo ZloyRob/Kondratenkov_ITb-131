@@ -4,11 +4,16 @@ Kondratenkov_Vadim.iml
 .idea/.name
 /idea/*
 /out/*
+/libs/*
 /target/*
 /src/META-INF/*
 *.MF
 Kondratenkov_Vadim.jar
-
+BUILD.sh
+RUN.sh
+TEST.sh
+original-Kondratenkov_Vadim-1.0-SNAPSHOT.jar
+Kondratenkov_Vadim-1.0-SNAPSHOT-shaded.jar
 manifest.txt
 res/db/Vadim.mv.db
 log/aaa.log
