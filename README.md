@@ -14,10 +14,10 @@
  Для тестирования проекта - mvn test. Команда test используется для выполнения JUnit тестов проекта.
  
  * Инструкция по отчетам: 
-   * Checkstyle
-   * Findbugs
-   * Cobertura 
-   * PMD 
+   * [Checkstyle](https://maven.apache.org/plugins/maven-checkstyle-plugin/usage.html).
+   * [Findbugs](http://gleclaire.github.io/findbugs-maven-plugin/usage.html).
+   * [Cobertura](http://www.mojohaus.org/cobertura-maven-plugin/usage.html). 
+   * [PMD](https://maven.apache.org/plugins/maven-pmd-plugin/usage.html). 
  
  Для того чтобы сформировать отчеты - mvn site.
  
