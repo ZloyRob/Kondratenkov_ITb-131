@@ -25,14 +25,14 @@ public class Validator {
         opt.addOption("h", "help", true, "Help");
         try {
             CommandLine line = parser.parse(opt, args);
-            us.login = line.getOptionValue("login");
-            us.pass = line.getOptionValue("pass");
-            us.path = line.getOptionValue("res");
-            us.role = line.getOptionValue("role");
-            us.dss = line.getOptionValue("ds");
-            us.des = line.getOptionValue("de");
-            us.vols = line.getOptionValue("vol");
-            if (line.hasOption("h") || null == us.login || null == us.pass) {
+            us.setLogin(line.getOptionValue("login"));
+            us.setPass(line.getOptionValue("pass"));
+            us.setPath(line.getOptionValue("res"));
+            us.setRole(line.getOptionValue("role"));
+            us.setDss(line.getOptionValue("ds"));
+            us.setDes(line.getOptionValue("de"));
+            us.setVols(line.getOptionValue("vol"));
+            if (line.hasOption("h") || null == us.getLogin() || null == us.getPass()) {
                 HelpFormatter fo = new HelpFormatter();
                 fo.printHelp("Help", opt);
                 log.info("Exit 0");
@@ -78,20 +78,20 @@ public class Validator {
 
     public int isAuthenticationTest(User usbd, UserInput us) {
         if (usbd == null) {
-            log.error("Пользователь - {} не найден", us.login);
+            log.error("Пользователь - {} не найден", us.getLogin());
             return 1;
         } else {
             us.userId = usbd.userId;
         }
         if (!aaaService.isCheckPass(usbd, us)) {
-            log.error("Пароль - {} не подходит {}", us.pass, us.login);
+            log.error("Пароль - {} не подходит {}", us.getPass(), us.getLogin());
             return 2;
         }
         return 0;
     }
 
     public boolean isAuthorization(Resource Res, UserInput us, boolean isAuthentication) {
-        if (isAuthentication & us.role != null & us.path != null) {
+        if (isAuthentication & us.getRole() != null & us.getPath() != null) {
             if (!aaaService.isCheckRole(us)) {
                 log.info("Exit 3");
                 System.exit(3);
@@ -115,7 +115,7 @@ public class Validator {
             return 3;
         }
         if (Res == null) {
-            log.error("Доступ к ресурсу - {} запрещен", us.path);
+            log.error("Доступ к ресурсу - {} запрещен", us.getPath());
             return 4;
         }
         log.info("Авторизация пройдена");
@@ -123,7 +123,7 @@ public class Validator {
     }
 
     public boolean isAccouting(Accounting journal, UserInput us, boolean isAuthorization) {
-        if (isAuthorization & us.dss != null) {
+        if (isAuthorization & us.getDss() != null) {
             if (!aaaService.isCheckDate(us) || !aaaService.isCheckVol(us)) {
                 log.info("Exit 5");
                 System.exit(5);

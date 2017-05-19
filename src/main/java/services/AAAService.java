@@ -20,25 +20,25 @@ public class AAAService {
     public boolean isCheckPass(User usbd, UserInput us) {
 
         if (us.userId == usbd.userId) {
-            if (md5Hex(md5Hex(us.pass) + usbd.salt).equals(usbd.pass)) {
+            if (md5Hex(md5Hex(us.getPass()) + usbd.salt).equals(usbd.pass)) {
                 log.info("Пароль верен");
                 return true;
             }
         }
 
-        log.error("Пароль {} не подходит к пользователю {}", us.pass, us.login);
+        log.error("Пароль {} не подходит к пользователю {}", us.getPass(), us.getLogin());
         return false;
     }
 
     public boolean isCheckRole(UserInput us) {
         Roles[] allrole = Roles.values();
         for (Roles allroles : allrole) {
-            if (us.role.equals(allroles.toString())) {
+            if (us.getRole().equals(allroles.toString())) {
                 log.info("Роль соответствует коллекции");
                 return true;
             }
         }
-        log.error("Роль - {} не соответствует коллекции", us.role);
+        log.error("Роль - {} не соответствует коллекции", us.getRole());
         return false;
     }
 
@@ -48,8 +48,8 @@ public class AAAService {
             setLenient(false);
         }};
         try {
-            us.ds = sdf.parse(us.dss);
-            us.de = sdf.parse(us.des);
+            us.ds = sdf.parse(us.getDss());
+            us.de = sdf.parse(us.getDes());
             log.info("Дата валидна");
             return true;
 
@@ -62,7 +62,7 @@ public class AAAService {
     public boolean isCheckVol(UserInput us) {
 
         try {
-            us.vol = Integer.valueOf(us.vols);
+            us.vol = Integer.valueOf(us.getVols());
 
         } catch (NumberFormatException e) {
             log.error(e);
@@ -72,7 +72,7 @@ public class AAAService {
             log.info("Объем валиден");
             return true;
         }
-        log.error("Объем отрицателен {}", us.vols);
+        log.error("Объем отрицателен {}", us.getVols());
         return false;
     }
 

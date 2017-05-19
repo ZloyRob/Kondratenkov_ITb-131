@@ -38,7 +38,7 @@ public class DaoClass {
     public User getUserFromDataBase(UserInput userInput, Connection dbConnection) {
         try {
             PreparedStatement statement = dbConnection.prepareStatement("SELECT * FROM USER WHERE (USER.LOGIN LIKE ?)");
-            statement.setString(1, userInput.login);
+            statement.setString(1, userInput.getLogin());
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 log.info("Пользователь найден");
@@ -47,7 +47,7 @@ public class DaoClass {
         } catch (SQLException e) {
             log.debug(e);
         }
-        log.error("Пользователь {} не найден", userInput.login);
+        log.error("Пользователь {} не найден", userInput.getLogin());
         return null;
     }
 
@@ -55,10 +55,10 @@ public class DaoClass {
         try {
             PreparedStatement statement;
             ResultSet result;
-            if (userInput.path == null) {
+            if (userInput.getPath() == null) {
                 return new Resource();
             }
-            String[] masOfPath = userInput.path.split("\\."); //разбиваем путь по уровням
+            String[] masOfPath = userInput.getPath().split("\\."); //разбиваем путь по уровням
             boolean access = false;
             String findPath = "";
             for (String string : masOfPath) {
@@ -66,7 +66,7 @@ public class DaoClass {
                 {
                     statement = dbConnection.prepareStatement("SELECT * FROM RESOURCE where (RESOURCE.PATH like ?) and (RESOURCE.ROLE like ?) and (RESOURCE.USERID like ?)");
                     statement.setString(1, findPath);
-                    statement.setString(2, userInput.role);
+                    statement.setString(2, userInput.getRole());
                     statement.setInt(3, userInput.userId);
                     result = statement.executeQuery();
                     if (result.next()) { //проверяем вернулся ли хоть 1 ресурс с таким доступом
@@ -78,19 +78,19 @@ public class DaoClass {
             }
             if (access) {
                 statement = dbConnection.prepareStatement("SELECT * FROM RESOURCE where (RESOURCE.PATH like ?)");
-                statement.setString(1, userInput.path);
+                statement.setString(1, userInput.getPath());
                 result = statement.executeQuery(); //получаем тот ресурс который запрашивали
                 Resource resource = new Resource();
                 while (result.next()) {
                     resource = (new Resource(Integer.valueOf(result.getString("ID"))));
                 }
-                log.info("Доступ к ресурсу {} разрешен", userInput.path);
+                log.info("Доступ к ресурсу {} разрешен", userInput.getPath());
                 return resource;
             }
         } catch (SQLException e) {
             log.debug(e);
         }
-        log.error("Доступ к ресурсу {} запрещен", userInput.path);
+        log.error("Доступ к ресурсу {} запрещен", userInput.getPath());
         return null;
     }
 
