@@ -1,9 +1,9 @@
-package DAO;
+package dao;
 
-import Models.Accounting;
-import Models.Resource;
-import Models.User;
-import Models.UserInput;
+import models.Accounting;
+import models.Resource;
+import models.User;
+import models.UserInput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

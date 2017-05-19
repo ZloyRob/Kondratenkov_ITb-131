@@ -1,7 +1,7 @@
-import DAO.DaoClass;
-import Models.Accounting;
-import Models.UserInput;
-import Services.Validator;
+import dao.DaoClass;
+import models.Accounting;
+import models.UserInput;
+import services.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.flywaydb.core.Flyway;

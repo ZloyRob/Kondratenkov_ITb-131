@@ -1,8 +1,8 @@
-package Services;
+package services;
 
-import Models.Accounting;
-import Models.User;
-import Models.UserInput;
+import models.Accounting;
+import models.User;
+import models.UserInput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,14 +10,14 @@ import java.text.SimpleDateFormat;
 
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
-class AAAService {
+public class AAAService {
     enum Roles {
         READ, WRITE, EXECUTE
     }
 
     private static final Logger log = LogManager.getLogger(AAAService.class.getName());
 
-    boolean isCheckPass(User usbd, UserInput us) {
+    public boolean isCheckPass(User usbd, UserInput us) {
 
         if (us.userId == usbd.userId) {
             if (md5Hex(md5Hex(us.pass) + usbd.salt).equals(usbd.pass)) {
@@ -30,7 +30,7 @@ class AAAService {
         return false;
     }
 
-    boolean isCheckRole(UserInput us) {
+    public boolean isCheckRole(UserInput us) {
         Roles[] allrole = Roles.values();
         for (Roles allroles : allrole) {
             if (us.role.equals(allroles.toString())) {
@@ -42,7 +42,7 @@ class AAAService {
         return false;
     }
 
-    boolean isCheckDate(UserInput us) {
+    public boolean isCheckDate(UserInput us) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd") {{
             setLenient(false);
@@ -59,7 +59,7 @@ class AAAService {
         }
     }
 
-    boolean isCheckVol(UserInput us) {
+    public boolean isCheckVol(UserInput us) {
 
         try {
             us.vol = Integer.valueOf(us.vols);
